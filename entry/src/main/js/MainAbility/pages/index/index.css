@@ -1,0 +1,192 @@
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-list {
+    width: 100%;
+    height: 100%;
+}
+
+.item-title {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-btn {
+    width: 100%;
+    height: 75px;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-spacer {
+    width: 100%;
+    height: 100px;
+}
+
+.title {
+    font-size: 28px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fake-btn {
+    width: 90%;
+    height: 70px;
+    border-radius: 35px;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    display: flex;
+}
+
+.white-bg {
+    background-color: #fff;
+}
+
+.police-bg {
+    background-color: #0018ff;
+}
+
+.sos-bg {
+    background-color: #ff4000;
+}
+
+.sos-colors-bg {
+    background-color: #4400ff;
+}
+
+.strobo-bg {
+    background-color: #444;
+    border-width: 2px;
+}
+
+.hunt-bg {
+    background-color: #f00;
+}
+
+.candle-bg {
+    background-color: #2f2c00;
+}
+
+.disco-bg {
+    background-color: #007300;
+}
+
+.blue-bg {
+    background-color: #00f;
+}
+
+.beacon-bg {
+    background-color: #f00;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #fff;
+}
+
+.warm-bg {
+    background-color: #ffebcc;
+}
+
+.v16-bg {
+    background-color: #f60;
+}
+
+.rescue-bg {
+    background-color: #fff;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #f00;
+}
+
+.romantic-bg {
+    background-color: #800020;
+}
+
+.fish {
+    background-color: #0f0;
+}
+
+.random-flash-bg {
+    background-color: #401183;
+}
+
+.hourglass-bg {
+    background-color: #8b4513;
+}
+
+.btn-text,.btn-text-black {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.light-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+}
+
+image {
+    object-fit: contain;
+}
+
+.color-dot {
+    width: 45px;
+    height: 45px;
+    border-radius: 22.5px;
+    margin: 2px;
+}
+
+.time-btn-large {
+    font-size: 29px;
+    font-weight: bold;
+    width: 65px;
+    text-align: center;
+}
+
+.light-screen text {
+    text-align: center;
+}
+
+.light-screen div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-base {
+    height: 95px;
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    border-width: 3px;
+    border-style: solid;
+    display: flex;
+}
+
+.t-tit {
+    font-size: 29px;
+    font-weight: bold;
+}
+
+.t-sub {
+    font-size: 27px;
+    padding: 0 10px;
+}

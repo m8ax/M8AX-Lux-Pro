@@ -1,0 +1,304 @@
+<div class="container" onswipe="handleSwipe">
+    <div if="{{ showCounter }}" class="light-screen"
+         style="background-color: #000; flex-direction: column; justify-content: center; align-items: center;"
+         onclick="deactivate">
+        <text style="font-size: 190px; color: {{ tickerColor }}; font-weight: bold;">{{ counterValue }}</text>
+    </div>
+    <div if="{{ showDice }}" class="light-screen"
+         style="background-color: #000; flex-direction: column; justify-content: center; align-items: center;"
+         onclick="handleDiceClick">
+        <div style="width: 240px; height: 240px; border-width: 8px; border-color: {{ tickerColor }};
+                border-radius: 50px; justify-content: center; align-items: center;">
+            <stack style="width: 240px; height: 240px;">
+                <div if="{{ diceValue >= 2 }}"
+                     style="width: 46px; height: 46px; background-color: {{ tickerColor }}; border-radius: 23px;
+                             margin-top: 35px; margin-left: 35px;"></div>
+                <div if="{{ diceValue === 6 }}"
+                     style="width: 46px; height: 46px; background-color: {{ tickerColor }}; border-radius: 23px;
+                             margin-top: 97px; margin-left: 35px;"></div>
+                <div if="{{ diceValue >= 4 }}"
+                     style="width: 46px; height: 46px; background-color: {{ tickerColor }}; border-radius: 23px;
+                             margin-top: 159px; margin-left: 35px;"></div>
+                <div if="{{ diceValue % 2 !== 0 }}"
+                     style="width: 46px; height: 46px; background-color: {{ tickerColor }}; border-radius: 23px;
+                             margin-top: 97px; margin-left: 97px;"></div>
+                <div if="{{ diceValue >= 4 }}"
+                     style="width: 46px; height: 46px; background-color: {{ tickerColor }}; border-radius: 23px;
+                             margin-top: 35px; margin-left: 159px;"></div>
+                <div if="{{ diceValue === 6 }}"
+                     style="width: 46px; height: 46px; background-color: {{ tickerColor }}; border-radius: 23px;
+                             margin-top: 97px; margin-left: 159px;"></div>
+                <div if="{{ diceValue >= 2 }}"
+                     style="width: 46px; height: 46px; background-color: {{ tickerColor }}; border-radius: 23px;
+                             margin-top: 159px; margin-left: 159px;"></div>
+            </stack>
+        </div>
+        <text style="font-size: 45px; color: {{ tickerColor }}; margin-top: 25px;">{{
+            isRolling ? 'SORTEANDO...' : 'SALIÓ EL ' + diceValue }}</text>
+        <text if="{{ ! isRolling }}" style="font-size: 24px; color: #aaaaaa; margin-top: 5px; text-align: center;"
+              value="TOCA PARA REPETIR\nDESLIZA PARA SALIR"></text>
+    </div>
+    <div if="{{ displayCoin }}" class="light-screen"
+         style="background-color: #000; flex-direction: column; justify-content: center; align-items: center;"
+         onclick="handleCoinClick">
+        <div style="width: 250px; height: 250px; border-width: 10px; border-color: #FFD700; border-radius: 125px;
+                background-color: #222; justify-content: center; align-items: center;">
+            <text style="font-size: 130px; color: #FFD700; font-weight: bold;">{{ coinResult === 'cara' ? 'C' : 'X' }}
+            </text>
+        </div>
+        <text style="font-size: 40px; color: #FFD700; margin-top: 30px; font-weight: bold;">{{
+            isRolling ? '...' : 'SALIÓ ' + coinResult.toUpperCase() }}</text>
+        <text if="{{ ! isRolling }}" style="font-size: 20px; color: #aaaaaa; margin-top: 10px; text-align: center;"
+              value="TOCA PARA TIRAR\nDESLIZA SALIR"></text>
+    </div>
+    <div if="{{ showVibration }}" class="light-screen"
+         style="background-color: {{ bgColor }}; flex-direction: column; justify-content: center; align-items: center;"
+         onclick="deactivate">
+        <text style="font-size: 45px; color: #fff; font-weight: bold;">MODO IMPERIAL</text>
+        <text style="font-size: 20px; color: #eee; margin-top: 20px;">¡ DISFRUTA DE TU MASAJE !</text>
+    </div>
+    <div if="{{ showHourglass }}" class="light-screen" style="background-color: {{ hourglassColor }};"
+         onclick="deactivate">
+        <div style="width: 100%; background-color: #000; height: {{ shutterHeight }} px; position: absolute;
+                bottom: 0px;"></div>
+    </div>
+    <div if="{{ showLight }}" class="light-screen"
+         style="background-color: {{ bgColor }}; flex-direction: column; justify-content: center; align-items: center;"
+         onclick="deactivate">
+        <div if="{{ showTicker }}"
+             style="flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%;">
+            <text style="font-size: 140px; color: {{ tickerColor }}; font-weight: bold; text-align: center;">{{
+                hourDisplay }}</text>
+            <text style="font-size: 140px; color: {{ tickerColor }}; font-weight: bold; text-align: center;
+                    margin-top: -20px;">{{ minuteDisplay }}</text>
+            <text style="font-size: 45px; color: {{ tickerColor }}; font-weight: bold; text-align: center;">{{
+                dateDisplay }}</text>
+        </div>
+    </div>
+    <list show="{{
+            ! showLight && ! showHourglass && ! showCounter && ! showDice && ! displayCoin && ! showVibration && ! showTicker
+            }}"
+          id="mainList"
+          focusable="true"
+          onrotation="handleCrownRotation"
+          scrolleffect="fade"
+          class="menu-list">
+        <list-item class="item-title" style="height: 160px; flex-direction: column; justify-content: center;">
+            <text style="font-size: 30px; color: dodgerblue; font-weight: bold;">M8AX Lux Pro</text>
+            <text style="font-size: 17px; color: orange; text-align: center; margin-top: 15px;"
+                  value="Máx. 5h Para Proteger Batería"></text>
+            <text style="font-size: 24px; color: red; text-align: center;">Youtube - m8ax</text>
+        </list-item>
+        <list-item class="item-title" style="height: 40px;">
+            <text style="color: yellowgreen; font-size: 26px;">MODO PERSONALIZADO</text>
+        </list-item>
+        <list-item style="height: 310px; flex-direction: column; align-items: center; justify-content: center;">
+            <div style="width: 100%; height: 60px; justify-content: center; align-items: center;">
+                <div class="color-dot"
+                     style="background-color: #f00; border-width: {{ customColor === '#ff0000' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#ff0000')"></div>
+                <div class="color-dot"
+                     style="background-color: #0f0; border-width: {{ customColor === '#00ff00' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#00ff00')"></div>
+                <div class="color-dot"
+                     style="background-color: #00f; border-width: {{ customColor === '#0000ff' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#0000ff')"></div>
+                <div class="color-dot"
+                     style="background-color: #ff0; border-width: {{ customColor === '#ffff00' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#ffff00')"></div>
+                <div class="color-dot"
+                     style="background-color: #fff; border-width: {{ customColor === '#ffffff' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#ffffff')"></div>
+                <div class="color-dot"
+                     style="background-color: #f60; border-width: {{ customColor === '#ff6600' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#ff6600')"></div>
+                <div class="color-dot"
+                     style="background-color: #f0f; border-width: {{ customColor === '#ff00ff' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#ff00ff')"></div>
+                <div class="color-dot"
+                     style="background-color: #0ff; border-width: {{ customColor === '#00ffff' ? '3px' : '0px' }};
+                             border-color: #fff;" onclick="setCustomColor('#00ffff')"></div>
+            </div>
+            <div style="width: 100%; height: 50px; justify-content: space-around; margin-top: 10px;">
+                <text class="time-btn-large" style="color: {{ customInterval === 300 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(300)">0.3s</text>
+                <text class="time-btn-large" style="color: {{ customInterval === 500 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(500)">0.5s</text>
+                <text class="time-btn-large" style="color: {{ customInterval === 1000 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(1000)">1s</text>
+                <text class="time-btn-large" style="color: {{ customInterval === 2000 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(2000)">2s</text>
+            </div>
+            <div style="width: 100%; height: 50px; justify-content: space-around; margin-top: 5px;">
+                <text class="time-btn-large" style="color: {{ customInterval === 3000 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(3000)">3s</text>
+                <text class="time-btn-large" style="color: {{ customInterval === 5000 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(5000)">5s</text>
+                <text class="time-btn-large" style="color: {{ customInterval === 15000 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(15000)">15s</text>
+                <text class="time-btn-large" style="color: {{ customInterval === 30000 ? '#fff' : '#555' }};"
+                      onclick="setCustomInterval(30000)">30s</text>
+            </div>
+            <div class="fake-btn" style="height: 70px; width: 300px; background-color: #222; border-width: 3px;
+                    border-color: {{ customColor }}; margin-top: 15px; display: flex; justify-content: center;
+                    align-items: center;" onclick="activate('custom')">
+                <text style="color: #fff; font-size: 27px; font-weight: bold; text-align: center;">ENCENDER FLASH</text>
+            </div>
+        </list-item>
+        <list-item class="item-title" style="height: 60px;">
+            <text style="color: #aaa; font-size: 24px;">BÁSICOS</text>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base white-bg" onclick="activate('white')">
+                <text class="t-tit" style="color: #000;">LINTERNA</text>
+                <text class="t-sub" style="color: #333; font-weight: bold;">La De Toda La Vida</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base warm-bg" onclick="activate('warm')">
+                <text class="t-tit" style="color: #000;">LECTURA CÁLIDA</text>
+                <text class="t-sub" style="color: #333; font-weight: bold;">Luz Suave Para Leer</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base hunt-bg" onclick="activate('hunt')">
+                <text class="t-tit" style="color: #fff;">MODO CAZA</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Vision Nocturna</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base" style="background-color: #0f0;" onclick="activate('fish')">
+                <text class="t-tit" style="color: #000;">MODO PESCA</text>
+                <text class="t-sub" style="color: #333; font-weight: bold;">Luz Verde De Pesca</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base blue-bg" onclick="activate('blue')">
+                <text class="t-tit" style="color: #fff;">MODO TÁCTICO</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Luz Azul Militar</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base" style="background-color: #300050; border-color: #300050;"
+                 onclick="activate('ticker')">
+                <text class="t-tit" style="color: #fff;">RELOJ GIGANTE</text>
+                <text class="t-sub" style="color: #aaa;">Hora En Colores RGB</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base" style="background-color: #004d00; border-color: #004d00;"
+                 onclick="activate('counter')">
+                <text class="t-tit" style="color: #fff;">CONTADOR 0 - 7200</text>
+                <text class="t-sub" style="color: #aaa;">Cuenta Hasta 2h - 7200s</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base" style="background-color: #003366; border-color: #003366;" onclick="activate('dice')">
+                <text class="t-tit" style="color: #fff;">TIRAR DADO</text>
+                <text class="t-sub" style="color: #aaa;">Lanzar Un Dado</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base" style="background-color: #CC5500; border-color: #CC5500;" onclick="activate('coin')">
+                <text class="t-tit" style="color: #FFF;">CARA O CRUZ</text>
+                <text class="t-sub" style="color: #aaa;">Lanzar Una Moneda</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base" style="background-color: #800000; border-color: #800000;"
+                 onclick="activate('vibration')">
+                <text class="t-tit" style="color: #fff;">MODO MASAJE</text>
+                <text class="t-sub" style="color: #aaa;">Vibración Imperial Pro</text>
+            </div>
+        </list-item>
+        <list-item class="item-title" style="height: 60px;">
+            <text style="color: #aaa; font-size: 24px;">AMBIENTE</text>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base hourglass-bg" onclick="activate('hourglass')">
+                <text class="t-tit" style="color: #fff;">RELOJ DE ARENA</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Ciclos De Cinco Minutos</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base romantic-bg" onclick="activate('romantic')">
+                <text class="t-tit" style="color: #fff;">CENA ROMÁNTICA</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Ambiente Muy Acogedor</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base candle-bg" onclick="activate('candle')">
+                <text class="t-tit" style="color: #fff;">MODO VELA</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Parpadeo De Llama Real</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base disco-bg" onclick="activate('disco')">
+                <text class="t-tit" style="color: #fff;">MODO DISCO</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Locura De Colores Total</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base random-flash-bg" onclick="activate('random_flash')">
+                <text class="t-tit" style="color: #fff;">FLASH ALEATORIO</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Color Nuevo Cada 1s</text>
+            </div>
+        </list-item>
+        <list-item class="item-title" style="height: 60px;">
+            <text style="color: #aaa; font-size: 24px;">SEGURIDAD VIAL</text>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base v16-bg" onclick="activate('v16')">
+                <text class="t-tit" style="color: #fff;">BALIZA V16</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Aviso De Emergencia</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base police-bg" onclick="activate('police')">
+                <text class="t-tit" style="color: #fff;">POLICÍA</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Luces Policiales</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base beacon-bg" style="border-color: #f00;" onclick="activate('beacon')">
+                <text class="t-tit" style="color: #ffffff;">BALIZA ROJA</text>
+                <text class="t-sub" style="color: #cccccc; font-weight: bold;">Señalización De Peligro</text>
+            </div>
+        </list-item>
+        <list-item class="item-title" style="height: 60px;">
+            <text style="color: #aaa; font-size: 24px;">EMERGENCIA</text>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base rescue-bg" style="border-color: #fff;" onclick="activate('rescue')">
+                <text class="t-tit" style="color: #000;">RESCATE MONTAÑA</text>
+                <text class="t-sub" style="color: #333; font-weight: bold;">Señal De Rescate</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base sos-bg" onclick="activate('sos')">
+                <text class="t-tit" style="color: #fff;">SOS EN MORSE</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Ayuda En Morse</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base sos-colors-bg" onclick="activate('sos_colors')">
+                <text class="t-tit" style="color: #fff;">SOS MORSE RGB</text>
+                <text class="t-sub" style="color: #ccc; font-weight: bold;">Ayuda En Morse RGB</text>
+            </div>
+        </list-item>
+        <list-item class="item-btn" style="height: 110px;">
+            <div class="btn-base strobo-bg" style="border-color: #444;" onclick="activate('strobo')">
+                <text class="t-tit" style="color: #ffffff;">ESTROBO</text>
+                <text class="t-sub" style="color: #cccccc; font-weight: bold;">Aviso Y Desorientación</text>
+            </div>
+        </list-item>
+        <list-item class="item-title" style="height: 300px; flex-direction: column; justify-content: center;">
+            <image src="{{ randomLogo }}" style="width: 260px; height: 260px; margin-top: 20px;"></image>
+        </list-item>
+        <list-item class="item-title" style="height: 80px; flex-direction: column; justify-content: center;">
+            <text style="font-size: 22px; color: #ffff00; font-weight: bold; text-align: center;"
+                  value="- By MarcoS OchoA DieZ -\n- MvIiIaX {{ displayYear }}{{ yearRoman }} -"></text>
+        </list-item>
+        <list-item class="item-spacer"></list-item>
+    </list>
+</div>
